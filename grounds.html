@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grounds - Football Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="init-supabase.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">FRS</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="grounds.html" class="active">Browse Grounds</a></li>
+                <li><a href="owner-submit.html">List Your Ground</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Available Football Grounds</h1>
+        </div>
+    </section>
+
+    <section class="grounds-section">
+        <div class="container">
+            <div class="filters">
+                <input type="text" id="searchLocation" placeholder="Search by location...">
+                <select id="filterRating">
+                    <option value="">All Ratings</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                </select>
+                <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+            </div>
+
+            <div id="groundsList" class="grounds-grid">
+                <p style="text-align: center; padding: 2rem;">Loading grounds...</p>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <p>No grounds found. Try adjusting your filters or submit a ground!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Football Reservation System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="grounds.js"></script>
+</body>
+
+</html>

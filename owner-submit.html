@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Ground - Football Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="init-supabase.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">FRS</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="grounds.html">Browse Grounds</a></li>
+                <li><a href="owner-submit.html" class="active">List Your Ground</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>List Your Football Ground</h1>
+            <p>Fill out the form below to submit your ground for approval</p>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="container">
+            <form id="groundSubmissionForm" class="ground-form">
+                <div class="form-group">
+                    <label for="ownerName">Owner Name *</label>
+                    <input type="text" id="ownerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerEmail">Email *</label>
+                    <input type="email" id="ownerEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerPhone">Phone Number *</label>
+                    <input type="tel" id="ownerPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="groundName">Ground Name *</label>
+                    <input type="text" id="groundName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location" placeholder="Full address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="groundType">Ground Type *</label>
+                    <select id="groundType" required>
+                        <option value="">Select type</option>
+                        <option value="Natural Grass">Natural Grass</option>
+                        <option value="Artificial Turf">Artificial Turf</option>
+                        <option value="Indoor">Indoor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dimensions">Ground Dimensions *</label>
+                    <input type="text" id="dimensions" placeholder="e.g., 100m x 60m" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pricePerHour">Price Per Hour (PKR) *</label>
+                    <input type="number" id="pricePerHour" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="facilities">Facilities (comma-separated)</label>
+                    <input type="text" id="facilities" placeholder="e.g., Parking, Changing Rooms, Lights">
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Ground Image URL *</label>
+                    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" required>
+                    <small>Use a direct image link from Unsplash or ImgBB</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="4" placeholder="Tell us about your ground..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit for Approval</button>
+            </form>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                <p>✓ Ground submitted successfully! It will be reviewed by our admin team.</p>
+                <a href="grounds.html" class="btn btn-secondary">View All Grounds</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Football Reservation System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="owner-submit.js"></script>
+</body>
+
+</html>

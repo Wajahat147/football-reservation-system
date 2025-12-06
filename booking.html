@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ground - Football Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="init-supabase.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">FRS</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="grounds.html">Browse Grounds</a></li>
+                <li><a href="owner-submit.html">List Your Ground</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Book Ground</h1>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="container">
+            <div id="groundDetails" class="ground-details-card">
+                <p>Loading ground details...</p>
+            </div>
+
+            <form id="bookingForm" class="booking-form">
+                <h2>Booking Details</h2>
+
+                <div class="form-group">
+                    <label for="playerName">Your Name *</label>
+                    <input type="text" id="playerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerEmail">Email *</label>
+                    <input type="email" id="playerEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerPhone">Phone Number *</label>
+                    <input type="tel" id="playerPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookingDate">Date *</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeSlot">Time Slot *</label>
+                    <select id="timeSlot" required>
+                        <option value="">Select time slot</option>
+                        <option value="06:00-08:00">06:00 AM - 08:00 AM</option>
+                        <option value="08:00-10:00">08:00 AM - 10:00 AM</option>
+                        <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+                        <option value="12:00-14:00">12:00 PM - 02:00 PM</option>
+                        <option value="14:00-16:00">02:00 PM - 04:00 PM</option>
+                        <option value="16:00-18:00">04:00 PM - 06:00 PM</option>
+                        <option value="18:00-20:00">06:00 PM - 08:00 PM</option>
+                        <option value="20:00-22:00">08:00 PM - 10:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamSize">Team Size</label>
+                    <input type="number" id="teamSize" min="1" placeholder="Number of players">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            </form>
+
+            <div id="bookingSuccess" class="success-message" style="display: none;">
+                <p>✓ Booking confirmed! You will receive a confirmation email shortly.</p>
+                <a href="grounds.html" class="btn btn-secondary">Back to Grounds</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Football Reservation System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="booking.js"></script>
+</body>
+
+</html>
