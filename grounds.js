@@ -48,25 +48,64 @@ function displayGrounds(grounds) {
     `).join('');
 }
 
-document.getElementById('applyFilters')?.addEventListener('click', () => {
-    const searchLocation = document.getElementById('searchLocation').value.toLowerCase();
+// Apply Filters
+document.getElementById('applyFilters')?.addEventListener('click', applyFilters);
+
+// Reset Filters
+document.getElementById('resetFilters')?.addEventListener('click', () => {
+    document.getElementById('searchLocation').value = '';
+    document.getElementById('filterGroundType').value = '';
+    document.getElementById('filterPriceRange').value = '';
+    document.getElementById('filterRating').value = '';
+    displayGrounds(allGrounds);
+});
+
+// Real-time search on Enter key
+document.getElementById('searchLocation')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        applyFilters();
+    }
+});
+
+function applyFilters() {
+    const searchLocation = document.getElementById('searchLocation').value.toLowerCase().trim();
+    const filterGroundType = document.getElementById('filterGroundType').value;
+    const filterPriceRange = document.getElementById('filterPriceRange').value;
     const filterRating = document.getElementById('filterRating').value;
 
     let filtered = allGrounds;
 
+    // Filter by location (search in both location and city fields)
     if (searchLocation) {
         filtered = filtered.filter(g =>
-            g.location.toLowerCase().includes(searchLocation) ||
-            g.city.toLowerCase().includes(searchLocation)
+            (g.location && g.location.toLowerCase().includes(searchLocation)) ||
+            (g.city && g.city.toLowerCase().includes(searchLocation))
         );
     }
 
+    // Filter by ground type
+    if (filterGroundType) {
+        filtered = filtered.filter(g => g.groundType === filterGroundType);
+    }
+
+    // Filter by price range
+    if (filterPriceRange) {
+        if (filterPriceRange === '5000+') {
+            filtered = filtered.filter(g => g.pricePerHour >= 5000);
+        } else {
+            const [min, max] = filterPriceRange.split('-').map(Number);
+            filtered = filtered.filter(g => g.pricePerHour >= min && g.pricePerHour <= max);
+        }
+    }
+
+    // Filter by rating
     if (filterRating) {
         const minRating = parseInt(filterRating);
         filtered = filtered.filter(g => (g.rating || 0) >= minRating);
     }
 
     displayGrounds(filtered);
-});
+}
 
 loadGrounds();
+

@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Reservation System</title>
+    <title>Football Reservation System - Book Your Perfect Pitch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="init-supabase.js"></script>
@@ -13,18 +18,55 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">FRS</div>
+            <div class="logo">
+                <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Football/Soccer Ball -->
+                    <circle cx="20" cy="20" r="16" fill="url(#logoGradient)" opacity="0.2" />
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" />
+                    <!-- Pentagon pattern on ball -->
+                    <path d="M 20 8 L 24 14 L 21 20 L 19 20 L 16 14 Z" fill="url(#logoGradient)" opacity="0.6" />
+                    <path d="M 24 14 L 30 16 L 28 22 L 21 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <path d="M 16 14 L 10 16 L 12 22 L 19 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <!-- FRS Text -->
+                    <text x="45" y="28" font-family="Outfit, sans-serif" font-size="24" font-weight="800"
+                        fill="url(#logoGradient)" letter-spacing="-1">FRS</text>
+                </svg>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="grounds.html">Browse Grounds</a></li>
                 <li><a href="owner-submit.html">List Your Ground</a></li>
                 <li><a href="admin.html">Admin</a></li>
             </ul>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="container">
+    <!-- Sidebar Menu -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-content">
+            <button class="sidebar-close" id="sidebarClose">&times;</button>
+            <ul class="sidebar-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="hero hero-with-bg">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
             <h1>Find & Book Football Grounds</h1>
             <p>Connect with ground owners and book your perfect pitch</p>
             <div class="cta-buttons">
@@ -36,23 +78,55 @@
 
     <section class="features">
         <div class="container">
-            <h2>Why Choose FRS?</h2>
+            <div class="section-header">
+                <span class="section-badge">Why Choose Us</span>
+                <h2>Everything You Need to Book the Perfect Pitch</h2>
+                <p>Experience seamless booking with verified grounds and real-time availability</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Easy Booking</h3>
-                    <p>Book football grounds in just a few clicks</p>
+                <div class="feature-card modern">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Booking</h3>
+                    <p>Reserve your ground in seconds with our streamlined booking process</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card modern">
+                    <div class="feature-icon">✓</div>
                     <h3>Verified Grounds</h3>
-                    <p>All grounds are verified by our admin team</p>
+                    <p>Every ground is personally verified by our team for quality assurance</p>
                 </div>
-                <div class="feature-card">
-                    <h3>Real Reviews</h3>
-                    <p>Read genuine feedback from other players</p>
+                <div class="feature-card modern">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Trusted Reviews</h3>
+                    <p>Read authentic reviews from players who've been there</p>
                 </div>
-                <div class="feature-card">
-                    <h3>Live Availability</h3>
-                    <p>See real-time slot availability</p>
+                <div class="feature-card modern">
+                    <div class="feature-icon">📍</div>
+                    <h3>Prime Locations</h3>
+                    <p>Find grounds in your area with our location-based search</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="stat-number">500+</h3>
+                    <p>Verified Grounds</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">10K+</h3>
+                    <p>Happy Players</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">50+</h3>
+                    <p>Cities Covered</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">24/7</h3>
+                    <p>Support Available</p>
                 </div>
             </div>
         </div>
@@ -65,6 +139,27 @@
     </footer>
 
     <script src="app.js"></script>
+    <script>
+        // Sidebar toggle functionality
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebarMenu.classList.add('active');
+        });
+
+        sidebarClose.addEventListener('click', () => {
+            sidebarMenu.classList.remove('active');
+        });
+
+        // Close sidebar when clicking outside
+        sidebarMenu.addEventListener('click', (e) => {
+            if (e.target === sidebarMenu) {
+                sidebarMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 
 </html>

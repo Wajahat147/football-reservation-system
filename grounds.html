@@ -13,7 +13,26 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">FRS</div>
+            <div class="logo">
+                <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Football/Soccer Ball -->
+                    <circle cx="20" cy="20" r="16" fill="url(#logoGradient)" opacity="0.2" />
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" />
+                    <!-- Pentagon pattern on ball -->
+                    <path d="M 20 8 L 24 14 L 21 20 L 19 20 L 16 14 Z" fill="url(#logoGradient)" opacity="0.6" />
+                    <path d="M 24 14 L 30 16 L 28 22 L 21 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <path d="M 16 14 L 10 16 L 12 22 L 19 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <!-- FRS Text -->
+                    <text x="45" y="28" font-family="Outfit, sans-serif" font-size="24" font-weight="800"
+                        fill="url(#logoGradient)" letter-spacing="-1">FRS</text>
+                </svg>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="grounds.html" class="active">Browse Grounds</a></li>
@@ -32,14 +51,33 @@
     <section class="grounds-section">
         <div class="container">
             <div class="filters">
-                <input type="text" id="searchLocation" placeholder="Search by location...">
+                <input type="text" id="searchLocation" placeholder="Search by location or city...">
+
+                <select id="filterGroundType">
+                    <option value="">All Ground Types</option>
+                    <option value="Natural Grass">Natural Grass</option>
+                    <option value="Artificial Turf">Artificial Turf</option>
+                    <option value="Indoor">Indoor</option>
+                </select>
+
+                <select id="filterPriceRange">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">PKR 0 - 1,000</option>
+                    <option value="1000-2000">PKR 1,000 - 2,000</option>
+                    <option value="2000-3000">PKR 2,000 - 3,000</option>
+                    <option value="3000-5000">PKR 3,000 - 5,000</option>
+                    <option value="5000+">PKR 5,000+</option>
+                </select>
+
                 <select id="filterRating">
                     <option value="">All Ratings</option>
                     <option value="5">5 Stars</option>
                     <option value="4">4+ Stars</option>
                     <option value="3">3+ Stars</option>
                 </select>
+
                 <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+                <button id="resetFilters" class="btn btn-secondary">Reset</button>
             </div>
 
             <div id="groundsList" class="grounds-grid">

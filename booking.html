@@ -13,7 +13,26 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">FRS</div>
+            <div class="logo">
+                <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Football/Soccer Ball -->
+                    <circle cx="20" cy="20" r="16" fill="url(#logoGradient)" opacity="0.2" />
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" />
+                    <!-- Pentagon pattern on ball -->
+                    <path d="M 20 8 L 24 14 L 21 20 L 19 20 L 16 14 Z" fill="url(#logoGradient)" opacity="0.6" />
+                    <path d="M 24 14 L 30 16 L 28 22 L 21 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <path d="M 16 14 L 10 16 L 12 22 L 19 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <!-- FRS Text -->
+                    <text x="45" y="28" font-family="Outfit, sans-serif" font-size="24" font-weight="800"
+                        fill="url(#logoGradient)" letter-spacing="-1">FRS</text>
+                </svg>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="grounds.html">Browse Grounds</a></li>
@@ -45,7 +64,24 @@
 
                 <div class="form-group">
                     <label for="playerEmail">Email *</label>
-                    <input type="email" id="playerEmail" required>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="email" id="playerEmail" required style="flex: 1;">
+                        <button type="button" id="sendOtpBtn" class="btn btn-secondary"
+                            style="white-space: nowrap;">Send OTP</button>
+                    </div>
+                    <small style="color: var(--gray); display: block; margin-top: 0.5rem;">
+                        📧 We'll send a verification code to your email
+                    </small>
+                </div>
+
+                <div class="form-group" id="otpSection" style="display: none;">
+                    <label for="otpInput">Enter OTP *</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="text" id="otpInput" maxlength="6" placeholder="Enter 6-digit OTP" style="flex: 1;">
+                        <button type="button" id="verifyOtpBtn" class="btn btn-success">Verify</button>
+                        <button type="button" id="resendOtpBtn" class="btn btn-secondary">Resend</button>
+                    </div>
+                    <small id="otpStatus" style="display: block; margin-top: 0.5rem;"></small>
                 </div>
 
                 <div class="form-group">
@@ -78,7 +114,11 @@
                     <input type="number" id="teamSize" min="1" placeholder="Number of players">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                <button type="submit" class="btn btn-primary" id="confirmBookingBtn" disabled>Confirm Booking</button>
+                <small style="color: var(--danger); display: block; margin-top: 0.5rem; text-align: center;"
+                    id="verificationWarning">
+                    ⚠️ Please verify your email with OTP before booking
+                </small>
             </form>
 
             <div id="bookingSuccess" class="success-message" style="display: none;">
@@ -94,6 +134,7 @@
         </div>
     </footer>
 
+    <script src="otp-service.js"></script>
     <script src="booking.js"></script>
 </body>
 

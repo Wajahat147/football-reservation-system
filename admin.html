@@ -13,7 +13,26 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">FRS</div>
+            <div class="logo">
+                <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Football/Soccer Ball -->
+                    <circle cx="20" cy="20" r="16" fill="url(#logoGradient)" opacity="0.2" />
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" />
+                    <!-- Pentagon pattern on ball -->
+                    <path d="M 20 8 L 24 14 L 21 20 L 19 20 L 16 14 Z" fill="url(#logoGradient)" opacity="0.6" />
+                    <path d="M 24 14 L 30 16 L 28 22 L 21 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <path d="M 16 14 L 10 16 L 12 22 L 19 20 Z" fill="url(#logoGradient)" opacity="0.4" />
+                    <!-- FRS Text -->
+                    <text x="45" y="28" font-family="Outfit, sans-serif" font-size="24" font-weight="800"
+                        fill="url(#logoGradient)" letter-spacing="-1">FRS</text>
+                </svg>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="grounds.html">Browse Grounds</a></li>
@@ -42,8 +61,15 @@
 
     <section class="page-header">
         <div class="container">
-            <h1>Admin Dashboard</h1>
-            <p>Manage ground submissions and bookings</p>
+            <div class="admin-header-content">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage ground submissions and bookings</p>
+                </div>
+                <button id="logoutBtn" class="btn btn-secondary" style="display: none;">
+                    Logout
+                </button>
+            </div>
         </div>
     </section>
 
@@ -52,7 +78,8 @@
             <div class="admin-tabs">
                 <button class="tab-btn active" data-tab="pending">Pending Grounds</button>
                 <button class="tab-btn" data-tab="verified">Verified Grounds</button>
-                <button class="tab-btn" data-tab="bookings">All Bookings</button>
+                <button class="tab-btn" data-tab="bookings">Active Bookings</button>
+                <button class="tab-btn" data-tab="past-bookings">Past Bookings</button>
             </div>
 
             <div id="pendingGrounds" class="tab-content active">
@@ -70,8 +97,15 @@
             </div>
 
             <div id="allBookings" class="tab-content">
-                <h2>All Bookings</h2>
+                <h2>Active Bookings</h2>
                 <div id="bookingsList" class="admin-list">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div id="pastBookings" class="tab-content">
+                <h2>Past Bookings</h2>
+                <div id="pastBookingsList" class="admin-list">
                     <p>Loading...</p>
                 </div>
             </div>

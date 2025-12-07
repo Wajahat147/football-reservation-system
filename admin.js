@@ -202,3 +202,39 @@ window.deleteGround = async (id) => {
 // Initial load
 loadPendingGrounds();
 loadVerifiedGrounds();
+
+// Logout Button Functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const logoutBtn = document.getElementById("logoutBtn");
+    const loginOverlay = document.getElementById("loginOverlay");
+    
+    // Show logout button if logged in
+    if (sessionStorage.getItem("adminLoggedIn") === "true") {
+        if (logoutBtn) logoutBtn.style.display = "block";
+        if (loginOverlay) loginOverlay.style.display = "none";
+    }
+    
+    // Handle logout
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function() {
+            if (confirm("Are you sure you want to logout?")) {
+                sessionStorage.removeItem("adminLoggedIn");
+                sessionStorage.removeItem("adminUsername");
+                window.location.reload();
+            }
+        });
+    }
+    
+    // Update login form to show logout button on success
+    const loginForm = document.getElementById("adminLoginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function() {
+            setTimeout(function() {
+                if (sessionStorage.getItem("adminLoggedIn") === "true") {
+                    if (logoutBtn) logoutBtn.style.display = "block";
+                }
+            }, 100);
+        });
+    }
+});
+
