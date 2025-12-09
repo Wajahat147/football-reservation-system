@@ -20,13 +20,45 @@ async function loadGroundDetails() {
         if (error) throw error;
 
         if (ground) {
-            document.getElementById('groundDetails').innerHTML = `
-                <img src="${ground.imageUrl}" alt="${ground.groundName}" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
-                <h2>${ground.groundName}</h2>
-                <p><strong>Location:</strong> ${ground.location}, ${ground.city}</p>
-                <p><strong>Price:</strong> PKR ${ground.pricePerHour}/hour</p>
-                <p><strong>Type:</strong> ${ground.groundType}</p>
-                <p><strong>Dimensions:</strong> ${ground.dimensions}</p>
+            // Set ground image as hero background
+            const heroSection = document.getElementById('groundHero');
+            heroSection.style.backgroundImage = `url('${ground.imageUrl}')`;
+            heroSection.style.backgroundSize = 'cover';
+            heroSection.style.backgroundPosition = 'center';
+
+            // Update hero content with ground details
+            document.getElementById('groundHeroContent').innerHTML = `
+                <h1>${ground.groundName}</h1>
+                <div class="ground-details-grid">
+                    <div class="detail-item">
+                        <span class="detail-icon">📍</span>
+                        <div>
+                            <strong>Location</strong>
+                            <p>${ground.location}, ${ground.city}</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">💰</span>
+                        <div>
+                            <strong>Price</strong>
+                            <p>PKR ${ground.pricePerHour}/hour</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">⚽</span>
+                        <div>
+                            <strong>Type</strong>
+                            <p>${ground.groundType}</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">📏</span>
+                        <div>
+                            <strong>Dimensions</strong>
+                            <p>${ground.dimensions}</p>
+                        </div>
+                    </div>
+                </div>
             `;
         } else {
             alert('Ground not found');
