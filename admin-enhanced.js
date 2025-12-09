@@ -49,11 +49,11 @@ async function loadBookingsEnhanced() {
             return bookingDate < today;
         });
 
-        // Display active and past bookings
+        // Display active and past bookings together
         list.innerHTML = `
-            <div style="margin-bottom: 3rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.5rem;">📅 Active Bookings (${activeBookings.length})</h3>
-                ${activeBookings.length === 0 ? '<p style="color: var(--gray);">No active bookings</p>' : activeBookings.map(booking => `
+            <div style="margin-bottom: 2rem;">
+                ${activeBookings.length === 0 && pastBookings.length === 0 ? '<p style="color: var(--gray);">No bookings yet</p>' : ''}
+                ${activeBookings.map(booking => `
                     <div class="admin-card" style="border-left: 4px solid var(--success);">
                         <h4>${booking.playerName}</h4>
                         <p><strong>📅 Date:</strong> ${booking.bookingDate}</p>
@@ -67,11 +67,8 @@ async function loadBookingsEnhanced() {
                         </div>
                     </div>
                 `).join('')}
-            </div>
-            <div>
-                <h3 style="color: var(--gray); margin-bottom: 1.5rem; font-size: 1.5rem;">📜 Past Bookings (${pastBookings.length})</h3>
-                ${pastBookings.length === 0 ? '<p style="color: var(--gray);">No past bookings</p>' : pastBookings.map(booking => `
-                    <div class="admin-card" style="opacity: 0.7; background: #f8f9fa; border-left: 4px solid var(--gray);">
+                ${pastBookings.map(booking => `
+                    <div class="admin-card" style="opacity: 0.6; background: #f8f9fa; border-left: 4px solid var(--gray);">
                         <h4>${booking.playerName} <span style="color: red; font-size: 0.9rem;">(Expired)</span></h4>
                         <p><strong>📅 Date:</strong> ${booking.bookingDate}</p>
                         <p><strong>⏰ Time:</strong> ${booking.timeSlot}</p>
