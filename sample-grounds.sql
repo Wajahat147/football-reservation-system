@@ -1,16 +1,16 @@
 -- Sample Ground Listings for Football Reservation System
 -- Run this in Supabase SQL Editor to add pre-verified grounds
 
--- Insert sample grounds
+-- Insert sample grounds (using correct column names with quotes)
 INSERT INTO grounds (
-    groundName,
+    "groundName",
     location,
     city,
-    groundType,
-    pricePerHour,
-    ownerName,
-    ownerEmail,
-    ownerPhone,
+    "groundType",
+    "pricePerHour",
+    "ownerName",
+    "ownerEmail",
+    "ownerPhone",
     facilities,
     status,
     rating
@@ -25,7 +25,7 @@ INSERT INTO grounds (
     'Ahmed Khan',
     'ahmed.khan@islamabadclub.com',
     '03001234567',
-    'Floodlights, Parking, Changing Rooms, Cafeteria',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms', 'Cafeteria'],
     'verified',
     4.5
 ),
@@ -38,7 +38,7 @@ INSERT INTO grounds (
     'Hassan Ali',
     'info@capitalsports.pk',
     '03119876543',
-    'Floodlights, Parking, Shower Facilities, First Aid',
+    ARRAY['Floodlights', 'Parking', 'Shower Facilities', 'First Aid'],
     'verified',
     4.7
 ),
@@ -51,7 +51,7 @@ INSERT INTO grounds (
     'Bilal Ahmed',
     'bilal@bluearena.com',
     '03215551234',
-    'Floodlights, VIP Lounge, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'VIP Lounge', 'Parking', 'Changing Rooms'],
     'verified',
     4.8
 ),
@@ -64,7 +64,7 @@ INSERT INTO grounds (
     'Usman Tariq',
     'usman@i14ground.pk',
     '03334445566',
-    'Floodlights, Parking',
+    ARRAY['Floodlights', 'Parking'],
     'verified',
     4.2
 ),
@@ -79,7 +79,7 @@ INSERT INTO grounds (
     'Kamran Shah',
     'kamran@rwpsports.com',
     '03451112233',
-    'Floodlights, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms'],
     'verified',
     4.4
 ),
@@ -92,7 +92,7 @@ INSERT INTO grounds (
     'Faisal Mahmood',
     'faisal@bahriafc.pk',
     '03009998877',
-    'Floodlights, Parking, Cafeteria, Shower Facilities',
+    ARRAY['Floodlights', 'Parking', 'Cafeteria', 'Shower Facilities'],
     'verified',
     4.9
 ),
@@ -105,7 +105,7 @@ INSERT INTO grounds (
     'Rizwan Ahmed',
     'rizwan@satelliteground.com',
     '03127778899',
-    'Floodlights, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms'],
     'verified',
     4.3
 ),
@@ -120,7 +120,7 @@ INSERT INTO grounds (
     'Shahid Afridi',
     'shahid@dhasports.pk',
     '03214445566',
-    'Floodlights, VIP Lounge, Parking, Cafeteria, Changing Rooms',
+    ARRAY['Floodlights', 'VIP Lounge', 'Parking', 'Cafeteria', 'Changing Rooms'],
     'verified',
     4.9
 ),
@@ -133,7 +133,7 @@ INSERT INTO grounds (
     'Imran Khan',
     'imran@gulbergfc.com',
     '03336667788',
-    'Floodlights, Parking, Shower Facilities',
+    ARRAY['Floodlights', 'Parking', 'Shower Facilities'],
     'verified',
     4.6
 ),
@@ -146,7 +146,7 @@ INSERT INTO grounds (
     'Ali Raza',
     'ali@joharground.pk',
     '03008889900',
-    'Floodlights, Parking',
+    ARRAY['Floodlights', 'Parking'],
     'verified',
     4.4
 ),
@@ -159,7 +159,7 @@ INSERT INTO grounds (
     'Wasim Akram',
     'wasim@modeltownfc.com',
     '03451234567',
-    'Floodlights, VIP Lounge, Parking, Cafeteria, Changing Rooms, Medical Room',
+    ARRAY['Floodlights', 'VIP Lounge', 'Parking', 'Cafeteria', 'Changing Rooms', 'Medical Room'],
     'verified',
     4.8
 ),
@@ -174,7 +174,7 @@ INSERT INTO grounds (
     'Asad Malik',
     'asad@cliftonsports.pk',
     '03212223344',
-    'Floodlights, Parking, Cafeteria',
+    ARRAY['Floodlights', 'Parking', 'Cafeteria'],
     'verified',
     4.5
 ),
@@ -186,6 +186,8 @@ INSERT INTO grounds (
     8500,
     'Hamza Sheikh',
     'hamza@dhakarachi.com',
+    '03118889977',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms', 'Cafeteria'],
     'verified',
     4.7
 ),
@@ -198,7 +200,7 @@ INSERT INTO grounds (
     'Fahad Ahmed',
     'fahad@gulshanground.pk',
     '03009876543',
-    'Floodlights, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms'],
     'verified',
     4.6
 ),
@@ -211,7 +213,7 @@ INSERT INTO grounds (
     'Zain Abbas',
     'zain@bahriakhi.com',
     '03335554433',
-    'Floodlights, VIP Lounge, Parking, Cafeteria',
+    ARRAY['Floodlights', 'VIP Lounge', 'Parking', 'Cafeteria'],
     'verified',
     4.8
 ),
@@ -226,7 +228,7 @@ INSERT INTO grounds (
     'Nadeem Malik',
     'nadeem@fsdcomplex.pk',
     '03117778899',
-    'Floodlights, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms'],
     'verified',
     4.3
 ),
@@ -239,7 +241,7 @@ INSERT INTO grounds (
     'Tariq Jameel',
     'tariq@lyallpurfc.com',
     '03008887766',
-    'Floodlights, Parking, Cafeteria',
+    ARRAY['Floodlights', 'Parking', 'Cafeteria'],
     'verified',
     4.5
 ),
@@ -254,7 +256,7 @@ INSERT INTO grounds (
     'Shoaib Malik',
     'shoaib@multanstadium.pk',
     '03214443322',
-    'Floodlights, Parking, Changing Rooms, Cafeteria',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms', 'Cafeteria'],
     'verified',
     4.6
 ),
@@ -267,7 +269,7 @@ INSERT INTO grounds (
     'Waqar Younis',
     'waqar@canttground.com',
     '03336665544',
-    'Floodlights, Parking',
+    ARRAY['Floodlights', 'Parking'],
     'verified',
     4.4
 ),
@@ -282,7 +284,7 @@ INSERT INTO grounds (
     'Shaheen Afridi',
     'shaheen@peshawarsports.pk',
     '03009998866',
-    'Floodlights, Parking, Cafeteria',
+    ARRAY['Floodlights', 'Parking', 'Cafeteria'],
     'verified',
     4.5
 ),
@@ -295,7 +297,7 @@ INSERT INTO grounds (
     'Babar Azam',
     'babar@unitownground.com',
     '03127776655',
-    'Floodlights, Parking, Changing Rooms',
+    ARRAY['Floodlights', 'Parking', 'Changing Rooms'],
     'verified',
     4.7
 );
