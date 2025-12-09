@@ -50,20 +50,120 @@ class OTPService {
         }
     }
 
-    // Simulate email sending (replace with actual email service)
+    // Send email using EmailJS
     async sendEmailViaService(email, otp, purpose) {
-        // For demonstration, we'll show the OTP in an alert
-        // In production, use EmailJS, SendGrid, or Supabase Edge Functions
-
         const purposeText = purpose === 'booking' ? 'booking confirmation' : 'ground registration';
 
-        // Simulate API call delay
+        // OPTION 1: Using EmailJS (Recommended - Free & Easy)
+        // Sign up at https://www.emailjs.com/ and get your credentials
+        // Uncomment and configure the following:
+
+        /*
+        try {
+            const serviceID = 'YOUR_SERVICE_ID'; // Get from EmailJS dashboard
+            const templateID = 'YOUR_TEMPLATE_ID'; // Get from EmailJS dashboard
+            const publicKey = 'YOUR_PUBLIC_KEY'; // Get from EmailJS dashboard
+
+            const templateParams = {
+                to_email: email,
+                otp_code: otp,
+                purpose: purposeText,
+                expiry_minutes: this.OTP_EXPIRY_MINUTES
+            };
+
+            await emailjs.send(serviceID, templateID, templateParams, publicKey);
+            return true;
+        } catch (error) {
+            console.error('EmailJS error:', error);
+            throw error;
+        }
+        */
+
+        // OPTION 2: Using Supabase Edge Function (if you set it up)
+        /*
+        try {
+            const { data, error } = await _supabase.functions.invoke('send-otp-email', {
+                body: { email, otp, purpose: purposeText, expiryMinutes: this.OTP_EXPIRY_MINUTES }
+            });
+            
+            if (error) throw error;
+            return true;
+        } catch (error) {
+            console.error('Supabase function error:', error);
+            throw error;
+        }
+        */
+
+        // TEMPORARY: For testing without email service
+        // This shows OTP on screen - REMOVE when you set up email service
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Show OTP in alert for testing (remove in production)
-        alert(`📧 Email Verification\n\nYour OTP for ${purposeText} is: ${otp}\n\nThis OTP will expire in ${this.OTP_EXPIRY_MINUTES} minutes.\n\n(In production, this will be sent to ${email})`);
+        // Display OTP in console for testing
+        console.log(`📧 OTP for ${email}: ${otp}`);
+
+        // Show notification instead of alert
+        this.showOTPNotification(email, otp, purposeText);
 
         return true;
+    }
+
+    // Show OTP notification (temporary - for testing)
+    showOTPNotification(email, otp, purpose) {
+        // Create a better notification instead of alert
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        `;
+
+        notification.innerHTML = `
+            <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
+                📧 Email Verification
+            </div>
+            <div style="margin-bottom: 10px;">
+                Your OTP for ${purpose}:
+            </div>
+            <div style="font-size: 2rem; font-weight: bold; letter-spacing: 5px; text-align: center; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                ${otp}
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">
+                Valid for ${this.OTP_EXPIRY_MINUTES} minutes
+            </div>
+            <div style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">
+                ⚠️ In production, this will be sent to ${email}
+            </div>
+            <button onclick="this.parentElement.remove()" style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(255,255,255,0.2);
+                border: none;
+                color: white;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.2rem;
+            ">×</button>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Auto-remove after 15 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 15000);
     }
 
     // Verify OTP
