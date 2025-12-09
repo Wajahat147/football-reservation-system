@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Demo - Football Reservation System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="advanced-features.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>Payment Demo</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">← Back to Home</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section style="padding: 4rem 0; min-height: 80vh;">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h1>💳 Payment System Demo</h1>
+                <p>Click the button below to see the payment modal in action!</p>
+            </div>
+
+            <div
+                style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                <h2 style="margin-bottom: 2rem;">Test Booking Details</h2>
+
+                <div
+                    style="background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.1) 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <p style="margin: 0.5rem 0; font-size: 1.1rem;"><strong>Ground:</strong> Islamabad Club — Futsal
+                        Court</p>
+                    <p style="margin: 0.5rem 0; font-size: 1.1rem;"><strong>Date:</strong> December 15, 2025</p>
+                    <p style="margin: 0.5rem 0; font-size: 1.1rem;"><strong>Time:</strong> 18:00 - 20:00</p>
+                    <p style="margin: 0.5rem 0; font-size: 1.5rem; color: var(--primary);"><strong>Amount:</strong> PKR
+                        5,000</p>
+                </div>
+
+                <button onclick="showPaymentDemo()" class="btn btn-primary"
+                    style="width: 100%; font-size: 1.2rem; padding: 1.2rem;">
+                    💳 Proceed to Payment
+                </button>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px;">
+                    <h3 style="margin-bottom: 1rem;">ℹ️ About This Demo</h3>
+                    <ul style="line-height: 1.8;">
+                        <li>This is a <strong>test mode</strong> payment modal</li>
+                        <li>Shows all payment options: Stripe, JazzCash, EasyPaisa</li>
+                        <li>No actual charges will be made</li>
+                        <li>To enable real payments, add your Stripe API key</li>
+                    </ul>
+                </div>
+
+                <div
+                    style="margin-top: 2rem; padding: 1.5rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border: 1px solid rgba(39, 174, 96, 0.3);">
+                    <h3 style="margin-bottom: 1rem; color: var(--success);">✅ Payment Features</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Multiple Payment Methods:</strong> Credit/Debit cards, JazzCash, EasyPaisa</li>
+                        <li><strong>Secure Processing:</strong> Stripe-powered encryption</li>
+                        <li><strong>Beautiful UI:</strong> Modern, responsive design</li>
+                        <li><strong>Easy Integration:</strong> Just add your API key</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3>🔧 How to Enable Real Payments</h3>
+                <ol style="text-align: left; max-width: 600px; margin: 2rem auto; line-height: 2;">
+                    <li>Sign up at <a href="https://stripe.com" target="_blank"
+                            style="color: var(--primary);">stripe.com</a></li>
+                    <li>Get your publishable key (starts with <code>pk_test_...</code>)</li>
+                    <li>Open <code>init-features.js</code></li>
+                    <li>Replace the key on line 13</li>
+                    <li>Change <code>payments: false</code> to <code>payments: true</code> on line 18</li>
+                    <li>Push to GitHub - Done! 🎉</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--dark); color: white; text-align: center; padding: 2rem 0;">
+        <p>© 2025 Football Reservation System. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="init-supabase.js"></script>
+    <script src="payment.js"></script>
+
+    <script>
+        function showPaymentDemo() {
+            // Show payment modal with test data
+            window.showPaymentModal(
+                5000,
+                'Islamabad Club — Futsal Court',
+                () => {
+                    alert('🎉 Payment Successful!\n\nBooking confirmed for:\nIslamabad Club — Futsal Court\nDecember 15, 2025\n18:00 - 20:00\n\nAmount: PKR 5,000');
+                }
+            );
+        }
+
+        // Add some console info
+        console.log('💳 Payment Demo Page Loaded');
+        console.log('Click the "Proceed to Payment" button to see the payment modal!');
+        console.log('\nTo enable real payments:');
+        console.log('1. Get Stripe API key from stripe.com');
+        console.log('2. Update init-features.js line 13 with your key');
+        console.log('3. Set payments: true on line 18');
+    </script>
+</body>
+
+</html>
