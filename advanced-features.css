@@ -1,0 +1,345 @@
+/* ============================================
+   ADVANCED FEATURES STYLES
+   ============================================ */
+
+/* PWA Install Button */
+#installPWA {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Payment Modal */
+.payment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.payment-modal-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.payment-close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: all 0.3s;
+}
+
+.payment-close:hover {
+    color: var(--danger);
+    transform: rotate(90deg);
+}
+
+.payment-summary {
+    background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.1) 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.payment-summary p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.payment-methods {
+    margin: 2rem 0;
+}
+
+.payment-method-btn {
+    width: 100%;
+    padding: 1.2rem;
+    margin: 0.75rem 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.payment-method-btn:hover {
+    border-color: var(--primary);
+    background: rgba(243, 156, 18, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2);
+}
+
+.payment-method-btn span {
+    font-size: 1.5rem;
+}
+
+#payment-element {
+    margin: 2rem 0;
+}
+
+/* Analytics Dashboard */
+.analytics-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.metric-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.metric-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    color: var(--gray);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.chart-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card h3 {
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    font-size: 1.3rem;
+}
+
+.bar-chart-item {
+    margin: 1.5rem 0;
+}
+
+.bar-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.bar-container {
+    background: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 40px;
+}
+
+.bar-fill {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    color: white;
+    font-weight: bold;
+    transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    min-width: 40px;
+}
+
+/* Smart Pricing Display */
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: var(--gray);
+    font-size: 1.2rem;
+}
+
+.current-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.price-reason {
+    font-size: 0.9rem;
+    color: var(--success);
+    font-style: italic;
+    padding: 0.5rem 1rem;
+    background: rgba(39, 174, 96, 0.1);
+    border-radius: 20px;
+}
+
+/* Toast Notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    max-width: 300px;
+}
+
+.toast-success {
+    background: var(--success);
+    color: white;
+}
+
+.toast-warning {
+    background: var(--primary);
+    color: white;
+}
+
+.toast-info {
+    background: #3498db;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Dark Mode Adjustments for Advanced Features */
+body.dark-mode .payment-modal-content {
+    background: var(--dark);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .payment-method-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .payment-method-btn:hover {
+    background: rgba(243, 156, 18, 0.1);
+    border-color: var(--primary);
+}
+
+body.dark-mode .metric-card,
+body.dark-mode .chart-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .bar-container {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-modal-content {
+        padding: 1.5rem;
+    }
+
+    #installPWA {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+}
