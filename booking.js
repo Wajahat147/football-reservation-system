@@ -199,14 +199,14 @@ document.getElementById('bookingForm')?.addEventListener('submit', async (e) => 
         bookingDate: document.getElementById('bookingDate').value,
         timeSlot: document.getElementById('timeSlot').value,
         teamSize: parseInt(document.getElementById('teamSize').value) || 0,
-        status: 'pending', // Changed to pending until payment
+        status: 'confirmed',
         createdAt: new Date().toISOString()
     };
 
-    console.log('Attempting to process booking:', bookingData);
+    console.log('Attempting to save booking:', bookingData);
 
     try {
-        // Get ground details for payment
+        // Get ground details
         const { data: ground, error: groundError } = await supabase
             .from('grounds')
             .select('*')
@@ -215,71 +215,57 @@ document.getElementById('bookingForm')?.addEventListener('submit', async (e) => 
 
         if (groundError) throw groundError;
 
-        // Calculate price (use smart pricing if available)
-        let finalPrice = ground.pricePerHour;
+        // Add amount and payment status
+        bookingData.status = 'confirmed';
+        bookingData.amount = ground.pricePerHour;
+        bookingData.paymentStatus = 'pending'; // Manual payment at ground
 
-        if (window.smartPricing && window.smartPricing.isModelReady) {
-            try {
-                const recommendation = await window.smartPricing.getPriceRecommendation(
-                    groundId,
-                    bookingData.bookingDate,
-                    bookingData.timeSlot,
-                    ground.pricePerHour
-                );
-                finalPrice = recommendation.recommendedPrice;
-                console.log(`💰 Smart pricing: PKR ${finalPrice} (${recommendation.reason})`);
-            } catch (error) {
-                console.warn('Smart pricing failed, using base price:', error);
-            }
+        // Save booking directly
+        const { data, error } = await supabase
+            .from('bookings')
+            .insert([bookingData])
+            .select();
+
+        if (error) throw error;
+
+        console.log('✅ Booking saved successfully');
+
+        // Clear OTP after successful booking
+        otpService.clearOTP(currentEmail);
+
+        // Send notification if available
+        if (window.pwaUtils) {
+            window.pwaUtils.showToast('Booking confirmed! 🎉', 'success');
         }
 
-        // Show payment modal
-        window.showPaymentModal(
-            finalPrice,
-            ground.groundName,
-            async () => {
-                // Payment successful - save booking
-                try {
-                    bookingData.status = 'confirmed';
-                    bookingData.amount = finalPrice;
-                    bookingData.paymentStatus = 'paid';
-                    bookingData.paymentDate = new Date().toISOString();
+        // Update success message with payment info
+        const successDiv = document.getElementById('bookingSuccess');
+        successDiv.innerHTML = `
+            <div class="success-icon">✓</div>
+            <h2>Booking Confirmed!</h2>
+            <div style="background: rgba(243, 156, 18, 0.1); padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Booking Details</h3>
+                <p style="margin: 0.5rem 0;"><strong>Ground:</strong> ${ground.groundName}</p>
+                <p style="margin: 0.5rem 0;"><strong>Date:</strong> ${bookingData.bookingDate}</p>
+                <p style="margin: 0.5rem 0;"><strong>Time:</strong> ${bookingData.timeSlot}</p>
+                <p style="margin: 0.5rem 0;"><strong>Amount:</strong> PKR ${ground.pricePerHour}</p>
+            </div>
+            <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid rgba(52, 152, 219, 0.3);">
+                <h3 style="color: #3498db; margin-bottom: 1rem;">💳 Payment Instructions</h3>
+                <p style="margin: 0.5rem 0;">Please pay <strong>PKR ${ground.pricePerHour}</strong> at the ground.</p>
+                <p style="margin: 0.5rem 0;">Show this confirmation to the ground staff.</p>
+                <p style="margin: 0.5rem 0; color: var(--gray); font-size: 0.9rem;">Booking ID: #${data[0].id}</p>
+            </div>
+            <p style="color: var(--gray); margin: 1rem 0;">A confirmation email will be sent to ${bookingData.playerEmail}</p>
+            <a href="grounds.html" class="btn btn-secondary" style="margin-top: 1rem;">Back to Grounds</a>
+        `;
 
-                    const { data, error } = await supabase
-                        .from('bookings')
-                        .insert([bookingData])
-                        .select();
-
-                    if (error) throw error;
-
-                    console.log('✅ Booking saved successfully');
-
-                    // Clear OTP after successful booking
-                    otpService.clearOTP(currentEmail);
-
-                    // Send notification if available
-                    if (window.pwaUtils) {
-                        window.pwaUtils.showToast('Booking confirmed! 🎉', 'success');
-                    }
-
-                    document.getElementById('bookingForm').style.display = 'none';
-                    document.getElementById('bookingSuccess').style.display = 'block';
-                } catch (error) {
-                    console.error('❌ Error saving booking:', error);
-                    alert('Payment successful but booking save failed: ' + error.message);
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Confirm Booking';
-                }
-            }
-        );
-
-        // Re-enable button (payment modal will handle the rest)
-        submitButton.disabled = false;
-        submitButton.textContent = 'Confirm Booking';
+        document.getElementById('bookingForm').style.display = 'none';
+        successDiv.style.display = 'block';
 
     } catch (error) {
-        console.error('❌ Error processing booking:', error);
-        alert('Error processing booking: ' + error.message);
+        console.error('❌ Error creating booking:', error);
+        alert('Error creating booking: ' + error.message);
         submitButton.disabled = false;
         submitButton.textContent = 'Confirm Booking';
     }
