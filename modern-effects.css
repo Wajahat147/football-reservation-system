@@ -1,0 +1,478 @@
+/* ============================================
+   MODERN HOMEPAGE EFFECTS & ANIMATIONS
+   ============================================ */
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animated Gradient Background */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Hero Section Modern Effects */
+.hero-with-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-with-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(243, 156, 18, 0.3) 100%);
+    animation: gradientAnimation 15s ease infinite;
+    background-size: 200% 200%;
+}
+
+/* Floating Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.hero-content h1 {
+    animation: slideInDown 0.8s ease-out;
+}
+
+.hero-content p {
+    animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.cta-buttons {
+    animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Parallax Effect for Hero */
+.hero-with-bg {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Feature Cards Hover Effects */
+.feature-card.modern {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card.modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.feature-card.modern:hover::before {
+    left: 100%;
+}
+
+.feature-card.modern:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(243, 156, 18, 0.3);
+}
+
+.feature-card.modern:hover .feature-icon {
+    transform: scale(1.2) rotate(10deg);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    50% {
+        transform: scale(1.3) rotate(10deg);
+    }
+}
+
+/* Animated Feature Icons */
+.feature-icon {
+    transition: all 0.4s ease;
+    display: inline-block;
+}
+
+/* Scroll Reveal Animation */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stats Counter Animation */
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+/* Glowing Button Effect */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Ripple Effect on Click */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Particle Background Effect */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(243, 156, 18, 0.5);
+    border-radius: 50%;
+    animation: particleFloat 15s infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 50%, #f39c12 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s linear infinite;
+}
+
+/* Section Header Animation */
+.section-header {
+    position: relative;
+}
+
+.section-badge {
+    animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Card Stagger Animation */
+.features-grid .feature-card:nth-child(1) {
+    animation: slideInUp 0.6s ease-out 0.1s both;
+}
+
+.features-grid .feature-card:nth-child(2) {
+    animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.features-grid .feature-card:nth-child(3) {
+    animation: slideInUp 0.6s ease-out 0.3s both;
+}
+
+.features-grid .feature-card:nth-child(4) {
+    animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+/* Navbar Scroll Effect */
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Typing Effect */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: 3px solid var(--primary);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Glow Effect */
+.glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(243, 156, 18, 0.8);
+    }
+}
+
+/* 3D Tilt Effect */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.tilt-card:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Loading Skeleton */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Smooth Page Transitions */
+.page-transition {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Magnetic Button Effect */
+.magnetic-btn {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Blob Animation */
+@keyframes blob {
+
+    0%,
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+.blob {
+    animation: blob 7s ease-in-out infinite;
+}
+
+/* Text Reveal Effect */
+.text-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.text-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transform: translateX(-100%);
+    animation: reveal 1.5s ease-out forwards;
+}
+
+@keyframes reveal {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .feature-card.modern:hover {
+        transform: translateY(-10px) scale(1.01);
+    }
+}
+
+/* Dark Mode Smooth Transitions */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
