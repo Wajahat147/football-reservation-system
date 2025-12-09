@@ -215,12 +215,7 @@ document.getElementById('bookingForm')?.addEventListener('submit', async (e) => 
 
         if (groundError) throw groundError;
 
-        // Add amount and payment status
-        bookingData.status = 'confirmed';
-        bookingData.amount = ground.pricePerHour;
-        bookingData.paymentStatus = 'pending'; // Manual payment at ground
-
-        // Save booking directly
+        // Save booking directly (no payment fields)
         const { data, error } = await supabase
             .from('bookings')
             .insert([bookingData])
