@@ -18,6 +18,11 @@
 <body>
     <nav class="navbar">
         <div class="container">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="logo">
                 <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -44,11 +49,6 @@
                 <li><a href="owner-submit.html">List Your Ground</a></li>
                 <li><a href="admin.html">Admin</a></li>
             </ul>
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
@@ -57,10 +57,123 @@
         <div class="sidebar-content">
             <button class="sidebar-close" id="sidebarClose">&times;</button>
             <ul class="sidebar-links">
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#settings">Settings</a></li>
+                <li><a href="#about" id="aboutLink">About Us</a></li>
+                <li><a href="#contact" id="contactLink">Contact</a></li>
+                <li><a href="#settings" id="settingsLink">Settings</a></li>
             </ul>
+        </div>
+    </div>
+
+    <!-- About Us Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="modal-close" id="aboutClose">&times;</span>
+            <h2>About Us</h2>
+            <div class="modal-body">
+                <p>Welcome to Football Reservation System - your premier platform for booking football grounds across
+                    Pakistan.</p>
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>Email:</strong>
+                            <p>info@footballreservation.pk</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <div>
+                            <strong>Phone:</strong>
+                            <p>+92 300 1234567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Office Location:</strong>
+                            <p>I-14, Islamabad, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <span class="modal-close" id="settingsClose">&times;</span>
+            <h2>Settings</h2>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Appearance</h3>
+                    <div class="setting-item">
+                        <label for="themeToggle">
+                            <span>🌓</span>
+                            <span>Dark Mode</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Notifications</h3>
+                    <div class="setting-item">
+                        <label for="emailNotifications">
+                            <span>📧</span>
+                            <span>Email Notifications</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="bookingReminders">
+                            <span>🔔</span>
+                            <span>Booking Reminders</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="bookingReminders" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Language</h3>
+                    <div class="setting-item">
+                        <label for="languageSelect">
+                            <span>🌐</span>
+                            <span>Preferred Language</span>
+                        </label>
+                        <select id="languageSelect" class="settings-select">
+                            <option value="en">English</option>
+                            <option value="ur">اردو (Urdu)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Privacy</h3>
+                    <div class="setting-item">
+                        <label for="shareLocation">
+                            <span>📍</span>
+                            <span>Share Location</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="shareLocation" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+            </div>
         </div>
     </div>
 
@@ -157,6 +270,108 @@
         sidebarMenu.addEventListener('click', (e) => {
             if (e.target === sidebarMenu) {
                 sidebarMenu.classList.remove('active');
+            }
+        });
+
+        // Modal functionality
+        const aboutModal = document.getElementById('aboutModal');
+        const settingsModal = document.getElementById('settingsModal');
+        const aboutLink = document.getElementById('aboutLink');
+        const settingsLink = document.getElementById('settingsLink');
+        const aboutClose = document.getElementById('aboutClose');
+        const settingsClose = document.getElementById('settingsClose');
+
+        // Open About Us Modal
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            aboutModal.style.display = 'block';
+            sidebarMenu.classList.remove('active');
+        });
+
+        // Open Settings Modal
+        settingsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            settingsModal.style.display = 'block';
+            sidebarMenu.classList.remove('active');
+        });
+
+        // Close modals
+        aboutClose.addEventListener('click', () => {
+            aboutModal.style.display = 'none';
+        });
+
+        settingsClose.addEventListener('click', () => {
+            settingsModal.style.display = 'none';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.style.display = 'none';
+            }
+            if (e.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+
+        // Settings functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const saveSettings = document.getElementById('saveSettings');
+
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.checked = true;
+        }
+
+        // Theme toggle
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Save settings
+        saveSettings.addEventListener('click', () => {
+            const emailNotifications = document.getElementById('emailNotifications').checked;
+            const bookingReminders = document.getElementById('bookingReminders').checked;
+            const language = document.getElementById('languageSelect').value;
+            const shareLocation = document.getElementById('shareLocation').checked;
+
+            // Save to localStorage
+            localStorage.setItem('emailNotifications', emailNotifications);
+            localStorage.setItem('bookingReminders', bookingReminders);
+            localStorage.setItem('language', language);
+            localStorage.setItem('shareLocation', shareLocation);
+
+            // Show confirmation
+            alert('Settings saved successfully!');
+            settingsModal.style.display = 'none';
+        });
+
+        // Load saved settings
+        window.addEventListener('DOMContentLoaded', () => {
+            const emailNotifications = localStorage.getItem('emailNotifications');
+            const bookingReminders = localStorage.getItem('bookingReminders');
+            const language = localStorage.getItem('language');
+            const shareLocation = localStorage.getItem('shareLocation');
+
+            if (emailNotifications !== null) {
+                document.getElementById('emailNotifications').checked = emailNotifications === 'true';
+            }
+            if (bookingReminders !== null) {
+                document.getElementById('bookingReminders').checked = bookingReminders === 'true';
+            }
+            if (language) {
+                document.getElementById('languageSelect').value = language;
+            }
+            if (shareLocation !== null) {
+                document.getElementById('shareLocation').checked = shareLocation === 'true';
             }
         });
     </script>
