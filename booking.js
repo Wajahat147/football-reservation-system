@@ -245,12 +245,40 @@ document.getElementById('bookingForm')?.addEventListener('submit', async (e) => 
                 <p style="margin: 0.5rem 0;"><strong>Time:</strong> ${bookingData.timeSlot}</p>
                 <p style="margin: 0.5rem 0;"><strong>Amount:</strong> PKR ${ground.pricePerHour}</p>
             </div>
-            <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid rgba(52, 152, 219, 0.3);">
-                <h3 style="color: #3498db; margin-bottom: 1rem;">💳 Payment Instructions</h3>
-                <p style="margin: 0.5rem 0;">Please pay <strong>PKR ${ground.pricePerHour}</strong> at the ground.</p>
-                <p style="margin: 0.5rem 0;">Show this confirmation to the ground staff.</p>
-                <p style="margin: 0.5rem 0; color: var(--gray); font-size: 0.9rem;">Booking ID: #${data[0].id}</p>
+            
+            <div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 1px solid #e9ecef; text-align: left;">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem; text-align: center;">💳 Payment Options</h3>
+                
+                <!-- Account Details -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); flex: 1; min-width: 250px; text-align: center;">
+                        <span style="font-size: 2rem; margin-bottom: 0.5rem; display: block;">📱</span>
+                        <h4 style="margin: 0.5rem 0; color: #f39c12;">NayaPay / SadaPay</h4>
+                        <p style="font-size: 1.25rem; font-weight: bold; color: #2c3e50; margin: 0.5rem 0;">0313 1563820</p>
+                        <p style="font-size: 0.9rem; color: #7f8c8d;">Account Title: Wajahat</p>
+                    </div>
+                </div>
+
+                <!-- Verification Form -->
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <h4 style="margin-bottom: 1rem; color: #2c3e50;">Submit Payment Proof</h4>
+                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1rem;">After sending payment, please enter the reference below:</p>
+                    
+                    <div class="form-group">
+                        <label for="trxId" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Transaction ID (Trx ID)</label>
+                        <input type="text" id="trxId" placeholder="e.g. 123456789" style="width: 100%; padding: 0.8rem; border: 1px solid #ced4da; border-radius: 8px; margin-bottom: 1rem;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentScreenshot" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Payment Screenshot</label>
+                        <input type="file" id="paymentScreenshot" accept="image/*" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
+                    </div>
+
+                    <button onclick="window.submitPaymentProof('${data[0].id}')" class="btn btn-primary" style="width: 100%;">Submit Payment Details</button>
+                    <p id="uploadStatus" style="margin-top: 1rem; text-align: center; font-size: 0.9rem;"></p>
+                </div>
             </div>
+
             <p style="color: var(--gray); margin: 1rem 0;">A confirmation email will be sent to ${bookingData.playerEmail}</p>
             <a href="grounds.html" class="btn btn-secondary" style="margin-top: 1rem;">Back to Grounds</a>
         `;
@@ -265,6 +293,59 @@ document.getElementById('bookingForm')?.addEventListener('submit', async (e) => 
         submitButton.textContent = 'Confirm Booking';
     }
 });
+
+// Function to handle payment proof submission
+window.submitPaymentProof = async (bookingId) => {
+    const trxId = document.getElementById('trxId').value;
+    const screenshot = document.getElementById('paymentScreenshot').files[0];
+    const statusMsg = document.getElementById('uploadStatus');
+
+    if (!trxId) {
+        alert('Please enter a Transaction ID');
+        return;
+    }
+
+    try {
+        statusMsg.style.color = 'blue';
+        statusMsg.textContent = 'Submitting details...';
+
+        // 1. Update Booking with Transaction ID
+        const { error } = await supabase
+            .from('bookings')
+            .update({
+                "transactionId": trxId,
+                status: 'pending_verification' // Optional: Update status to indicate verification needed
+            })
+            .eq('id', bookingId);
+
+        if (error) throw error;
+
+        // Note: Real file upload requires Supabase Storage bucket setup.
+        // For now, we'll simulate the success if a file is selected.
+        if (screenshot) {
+            console.log('File selected:', screenshot.name);
+            // In a real app, upload code goes here:
+            // const { data, error } = await supabase.storage.from('receipts').upload(...)
+        }
+
+        statusMsg.style.color = 'green';
+        statusMsg.innerHTML = '✅ Payment details submitted successfully! We will verify and confirm shortly.';
+
+        // Disable inputs
+        document.getElementById('trxId').disabled = true;
+        document.getElementById('paymentScreenshot').disabled = true;
+        document.querySelector('button[onclick^="window.submitPaymentProof"]').disabled = true;
+        document.querySelector('button[onclick^="window.submitPaymentProof"]').textContent = 'Submitted';
+
+    } catch (error) {
+        console.error('Error submitting payment:', error);
+        statusMsg.style.color = 'red';
+        statusMsg.textContent = 'Error submitting details. Please try again.';
+        if (error.message.includes('column "transactionId" of relation "bookings" does not exist')) {
+            alert('Database update required: Please run the "add-payment-columns.sql" script in Supabase.');
+        }
+    }
+};
 
 loadGroundDetails();
 
