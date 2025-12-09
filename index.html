@@ -5,12 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Reservation System - Book Your Perfect Pitch</title>
+
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f39c12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FRS">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- TensorFlow.js for Machine Learning -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+
+    <!-- Stripe for Payments -->
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="init-supabase.js"></script>
 </head>
@@ -374,6 +390,12 @@
             }
         });
     </script>
+
+    <!-- Advanced Features -->
+    <script src="pwa.js"></script>
+    <script src="smart-pricing.js"></script>
+    <script src="payment.js"></script>
+    <script src="analytics.js"></script>
 </body>
 
 </html>
